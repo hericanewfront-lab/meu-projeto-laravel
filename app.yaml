@@ -1,0 +1,5 @@
+kind: wasmer.io/App.v0
+name: meu-projeto-laravel
+owner: hericanewfront-lab
+package: .
+app_id: da_nQgIotrUpeOL
