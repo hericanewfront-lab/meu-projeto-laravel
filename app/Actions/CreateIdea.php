@@ -3,15 +3,19 @@
 namespace App\Actions;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\DB;
 
 class CreateIdea
 {
-    public function handle(array $attributes, ?User $user = null)
+    public function __construct(#[CurrentUser] protected User $user)
     {
-        /** @var User */
-        $user ??= Auth::user();
+        //
+    }
+
+    public function handle(array $attributes)
+    {
+        $user = $this->user;
 
         $data = collect($attributes)->only([
             'title', 'description', 'status', 'links',
