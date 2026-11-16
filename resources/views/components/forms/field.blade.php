@@ -22,7 +22,5 @@
             {{ $attributes }}>
     @endif
 
-    @error($name)
-        <p class="error">{{ $message }}</p>
-    @enderror
+    <x-forms.error name="{{ $name }}"/>
 </div>

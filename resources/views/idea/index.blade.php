@@ -42,19 +42,55 @@
                     </x-card>
                 @endforelse
             </div>
+
             <x-modal name="create-idea" title="New Idea">
-                <form method="POST" action="{{ route('idea.store') }}">
+                <form x-data="{ status: @js(old('status', 'pending')) }" method="POST" action="{{ route('idea.store') }}">
                     @csrf
 
                     <div class="space-y-6">
-                        <x-forms.field label="Title" name="title" placeholder="Enter an idea for your title"
-                            autofocus />
+                        <x-forms.field
+                            label="Title"
+                            name="title"
+                            placeholder="Enter an idea for your title"
+                            autofocus
+                            required
+                        />
 
-                        <x-forms.field label="Description" name="description" type="textarea"
-                            placeholder="Describe your idea..." />
+                        <div class="space-y-2">
+                            <label for="status" class="label">Status</label>
+
+                            <div class="flex gap-x-3">
+                                @foreach (App\Enums\IdeaStatus::cases() as $status)
+                                    <button
+                                        type="button"
+                                        @click="status = @js($status->value)"
+                                        class="btn flex-1 h-10"
+                                        :class="{ 'btn-outlined': status !== @js($status->value) }"
+                                    >
+                                        {{ $status->label() }}
+                                    </button>
+                                @endforeach
+                            </div>
+
+                            <input type="hidden" name="status" :value="status" class="input">
+                        </div>
+
+                        <x-forms.error name="status" />
+
+                        <x-forms.field
+                            label="Description"
+                            name="description"
+                            type="textarea"
+                            placeholder="Describe your idea..."
+                        />
+                    </div>
+
+                    <div class="flex justify-end gap-x-5 mt-6">
+                        <button type="button" @click="$dispatch('close-modal', 'create-idea')">Cancelar</button>
+                        <button type="submit" class="btn">Criar</button>
                     </div>
                 </form>
             </x-modal>
         </div>
-
+    </div>
 </x-layout>
