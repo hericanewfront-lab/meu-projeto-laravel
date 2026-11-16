@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\IdeaStatus;
 use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
@@ -17,17 +18,12 @@ class IdeaController extends Controller
 
     public function index(Request $request)
     {
+            /** @var \App\Models\User $user */
         $user = Auth::user();
-
-        $status = $request->status;
-
-        if (! in_array($status, IdeaStatus::values())) {
-        $status = null;
-    }
 
         $ideas = $user
             ->ideas()
-            ->when($status, fn ($query, $status) => $query->where('status', $status))
+            ->when(in_array($request->status, IdeaStatus::values()), fn ($query) => $query->where('status', $request->status))
             ->get();
 
         return view('idea.index', [
@@ -48,7 +44,7 @@ class IdeaController extends Controller
      */
     public function store(StoreIdeaRequest $request)
     {
-        //
+        dd('persist the idea');
     }
 
     /**
