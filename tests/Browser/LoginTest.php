@@ -11,10 +11,8 @@ it('logs a user', function () {
         ->click('[@login-button]')
         ->assertPathIs('/');
 
-    $this ->assertAuthenticated();
+    $this->assertAuthenticated();
 });
-
-
 
 it('logs out user', function () {
     $user = User::factory()->create();

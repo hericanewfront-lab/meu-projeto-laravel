@@ -2,7 +2,6 @@
 
 namespace App\Enums;
 
-
 enum IdeaStatus: string
 {
     case PENDING = 'pending';
@@ -20,6 +19,6 @@ enum IdeaStatus: string
 
     public static function values()
     {
-        return array_map(fn($status) => $status->value, static::cases());
+        return array_map(fn ($status) => $status->value, self::cases());
     }
 }

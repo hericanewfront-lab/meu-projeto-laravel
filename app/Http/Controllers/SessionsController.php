@@ -12,7 +12,6 @@ class SessionsController extends Controller
         return view('auth.login');
     }
 
-
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -41,4 +40,3 @@ class SessionsController extends Controller
         return redirect('/');
     }
 }
-

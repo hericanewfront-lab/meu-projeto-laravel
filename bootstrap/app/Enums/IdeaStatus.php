@@ -2,7 +2,6 @@
 
 namespace App\Enums;
 
-
 enum IdeaStatus: string
 {
     case PENDING = 'pending';

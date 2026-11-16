@@ -33,6 +33,6 @@ class User extends Authenticatable
 
     public function ideas(): HasMany
     {
-         return $this->Hasmany(Idea::class);
+        return $this->Hasmany(Idea::class);
     }
 }
