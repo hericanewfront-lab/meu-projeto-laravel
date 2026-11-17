@@ -37,7 +37,7 @@
                             <div class="mb-4 -mx-4 -mt-4 rounded-t-lg overflow-hidden">
                                 <img
                                     src="{{ asset('storage/' . $idea->image_path) }}"
-                                    alt=""
+                                    alt="{{ $idea->title }}"
                                     class="w-full h-auto object-cover"
                                 >
                             </div>
@@ -61,6 +61,5 @@
                 @endforelse
             </div>
         </div>
-
-        <x-idea.modal/>
+        <x-idea.modal :idea="new App\Models\Idea()"/>
 </x-layout>

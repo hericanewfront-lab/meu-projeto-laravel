@@ -45,26 +45,23 @@ it('edits an existing new idea', function () {
 
     visit(route('idea.show', $idea))
         ->click('@edit-idea-button')
-        ->fill('@title', 'Some Example Title')
+        ->fill('title', 'Some Example Title')
         ->click('@button-status-completed')
         ->fill('description', 'An example description')
         ->fill('@new-link', 'https://laracasts.com')
         ->click('@submit-new-link-button')
-        ->fill('@new-link', 'https://laravel.com')
-        ->click('@submit-new-link-button')
         ->fill('@new-step', 'Do a thing')
         ->click('@submit-new-step-button')
-        ->fill('@new-step', 'Do another thing')
-        ->click('@submit-new-step-button')
-        ->click('Create')
-        ->assertPathIs('/ideas');
+        ->click('Update')
+        ->assertRoute('idea.show', [$idea]);
+
 
     // Acedemos diretamente através do utilizador autenticado ($user->ideas)
     expect($user->ideas()->first()->toArray())->toMatchArray([
         'title' => 'Some Example Title',
         'status' => 'completed',
         'description' => 'exemplo de descricao',
-        'links' => ['http://laracasts.com', 'http://laravel.com'],
+        'links' => [$idea->links[0], 'http://laracasts.com'],
     ]);
 
     expect($user->ideas()->first()->steps)->toHaveCount(2);

@@ -26,7 +26,7 @@
 </x-layout>
 --}}
 
-@props(['is' => 'a'])
+@props(['is' => 'a', 'href' => null])
 
 <{{ $is }} {{ $attributes(['class' => 'border border-border rounded-lg bg-card p-4 md:text-sm block']) }}>
     {{ $slot }}

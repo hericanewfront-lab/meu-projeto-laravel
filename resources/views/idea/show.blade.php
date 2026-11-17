@@ -36,10 +36,11 @@
             <x-idea.status-label :status="$idea->status->value">{{ $idea->status->label() }}</x-idea.status-label>
             <div class="text-muted-foreground text-sm">{{ $idea->created_at->diffForHumans() }}</div>
         </div>
-
-        <x-card class="mt-6">
-            <div class="text-foreground max-w-none cursor-pointer">{{ $idea->description }}</div>
-        </x-card>
+        @if ($idea->description)
+            <x-card class="mt-6">
+                <div class="text-foreground max-w-none cursor-pointer">{{ $idea->description }}</div>
+            </x-card>
+        @endif
 
         @if ($idea->steps->count())
             <div>
