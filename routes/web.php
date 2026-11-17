@@ -19,8 +19,11 @@ Route::get('/ideas/{idea}', [IdeaController::class, 'show'])
     ->name('idea.show')
     ->middleware('auth');
 
-Route::patch('/ideas/{idea}', [IdeaController::class, 'update'])->name('idea.update')->middleware('auth');
+Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])
+    ->name('idea.edit')
+    ->middleware('auth');
 
+Route::patch('/ideas/{idea}', [IdeaController::class, 'update'])->name('idea.update')->middleware('auth');
 
 Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('idea.destroy')->middleware('auth');
 
@@ -36,5 +39,5 @@ Route::post('/login', [SessionsController::class, 'store'])->middleware('guest')
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
-
 Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
+Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');

@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Idea;
-
-
+use App\Models\User;
 
 it('criar nova ideia', function () {
     $user = User::factory()->create();
@@ -37,7 +35,6 @@ it('criar nova ideia', function () {
     expect($user->ideas()->first()->steps)->toHaveCount(2);
 });
 
-
 it('edits an existing new idea', function () {
     $this->actingAs($user = User::factory()->create());
 
@@ -54,7 +51,6 @@ it('edits an existing new idea', function () {
         ->click('@submit-new-step-button')
         ->click('Update')
         ->assertRoute('idea.show', [$idea]);
-
 
     // Acedemos diretamente através do utilizador autenticado ($user->ideas)
     expect($user->ideas()->first()->toArray())->toMatchArray([

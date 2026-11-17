@@ -57,7 +57,7 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-       Gate::authorize('workWith', $idea);
+        Gate::authorize('workWith', $idea);
 
         return view('idea.show', [
             'idea' => $idea,
@@ -71,6 +71,9 @@ class IdeaController extends Controller
     {
         Gate::authorize('workWith', $idea);
 
+        return view('ideas.edit', [
+            'idea' => $idea,
+        ]);
     }
 
     /**
@@ -83,14 +86,15 @@ class IdeaController extends Controller
 
         return back()->with('success', 'Idea updated!');
     }
-        /**
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Idea $idea)
     {
 
         Gate::authorize('workWith', $idea);
-            $idea->delete();
+        $idea->delete();
 
         return to_route('idea.index');
     }

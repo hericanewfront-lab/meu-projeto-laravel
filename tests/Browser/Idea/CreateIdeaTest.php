@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\Idea;
 use App\Models\User;
 
 it('creates a new idea', function () {
@@ -24,13 +23,12 @@ it('creates a new idea', function () {
         ->click('Create')
         ->assertPathIs('/ideas');
 
+    expect($idea = $user->ideas()->first())->toMatchArray([
+        'title' => 'Some Example Title',
+        'status' => 'completed',
+        'description' => 'An example description',
+        'links' => ['https://laracasts.com', 'https://laravel.com'],
+    ]);
 
-        expect($idea = $user->ideas()->first())->toMatchArray([
-    'title' => 'Some Example Title',
-    'status' => 'completed',
-    'description' => 'An example description',
-    'links' => ['https://laracasts.com', 'https://laravel.com'],
-]);
-
-expect($idea->steps)->toHaveCount(2);
+    expect($idea->steps)->toHaveCount(2);
 });

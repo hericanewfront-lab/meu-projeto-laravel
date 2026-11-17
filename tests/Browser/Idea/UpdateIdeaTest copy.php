@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Idea;
 use App\Models\User;
 
-it('shows the initial input state', function (){
+it('shows the initial input state', function () {
     $this->actingAs($user = User::factory()->create());
 
     $idea = Idea::factory()->for($user)->create();
@@ -19,7 +19,7 @@ it('shows the initial input state', function (){
 it('edits an existing idea', function () {
     $this->actingAs($user = User::factory()->create());
 
-   $idea = Idea::factory()->for($user)->create();
+    $idea = Idea::factory()->for($user)->create();
 
     visit(route('idea.show', $idea))
         ->click('@edit-idea-button')
